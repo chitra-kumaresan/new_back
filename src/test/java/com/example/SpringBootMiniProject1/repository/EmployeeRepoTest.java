@@ -28,7 +28,7 @@ public class EmployeeRepoTest {
                     .mobileNumber("123456")
                     .build();
         }
-
+//Post method testcase
         @DisplayName("Test whether the passenger get saved in DB")
         @Test
         public void givenEmployee_whenSave_thenReturnSavedEmployee(){
@@ -38,8 +38,9 @@ public class EmployeeRepoTest {
 
 
         }
+//GET All testcase
         @Test
-        public  void givenPassengerList_whenFindAll_thenPassengerList() {
+        public  void givenEmployeeList_whenFindAll_thenEmployeeList() {
             Employee employee1 = Employee.builder()
                     .firstName("chandru")
                     .lastName("kumaresan")
@@ -52,32 +53,36 @@ public class EmployeeRepoTest {
             employeeRepo.save(employee);
             employeeRepo.save(employee1);
 
-            List<Employee> passengerList = employeeRepo.findAll();
-            assertThat(passengerList).isNotNull();
-            assertThat(passengerList.size()).isEqualTo(2);
+            List<Employee> employeeList = employeeRepo.findAll();
+            assertThat(employeeList).isNotNull();
+            assertThat(employeeList.size()).isEqualTo(2);
 
         }
+        
+//get by email
         @Test
         public  void givenEmployeeEmail_whenFindByEmail_thenReturnEmployee(){
             employeeRepo.save(employee);
-           Optional<Employee> passengerDb=employeeRepo.findByEmail(employee.getEmail());
-            assertThat(passengerDb).isNotNull();
+           Optional<Employee> employeeDb=employeeRepo.findByEmail(employee.getEmail());
+            assertThat(employeeDb).isNotNull();
 
         }
+//update employee
         @Test
-        public  void givenPassenger_whenUpdatePassenger_thenReturnUpdatedPassenger(){
+        public  void givenEmployee_whenUpdateEmployee_thenReturnUpdatedEmployee(){
             employeeRepo.save(employee);
-            Employee savedPassenger=employeeRepo.findById(employee.getEmpId()).get();
-            savedPassenger.setEmail("kumar@gmail.com");
-            Employee updatedPassenger=employeeRepo.save(savedPassenger);
-            assertThat(updatedPassenger.getEmail()).isEqualTo("kumar@gmail.com");
+            Employee savedEmployee=employeeRepo.findById(employee.getEmpId()).get();
+            savedEmployee.setEmail("kumar@gmail.com");
+            Employee updatedEmployee=employeeRepo.save(savedEmployee);
+            assertThat(updatedEmployee.getEmail()).isEqualTo("kumar@gmail.com");
         }
+//delete employee
         @Test
         public  void givenEmployee_whenDelete_thenRemoveEmployee(){
             employeeRepo.save(employee);
             employeeRepo.deleteById(employee.getEmpId());
-            Optional<Employee> passenger1=employeeRepo.findById(employee.getEmpId());
-            assertThat(passenger1).isEmpty();
+            Optional<Employee> employee1=employeeRepo.findById(employee.getEmpId());
+            assertThat(employee1).isEmpty();
 
         }
 
